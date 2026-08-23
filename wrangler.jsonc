@@ -4,7 +4,7 @@
 	"compatibility_flags": [
 		"global_fetch_strictly_public"
 	],
-	"name": "rodrigosantos.dev",
+	"name": "rodrigosantos-dev",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",

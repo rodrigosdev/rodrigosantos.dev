@@ -2,6 +2,7 @@
   "name": "rodrigosantos.dev",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "bun@1.4.0",
   "engines": {
     "bun": ">=1.4.0"
   },
