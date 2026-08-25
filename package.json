@@ -14,12 +14,14 @@
     "typecheck": "bun node_modules/typescript/bin/tsc --noEmit"
   },
   "dependencies": {
+    "@stylexjs/stylex": "^0.19.0",
     "next": "16.3.2",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@oxlint/plugins": "1.80.0",
+    "@stylexjs/eslint-plugin": "^0.19.0",
     "@types/node": "^26.3.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",

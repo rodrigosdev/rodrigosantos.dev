@@ -46,6 +46,7 @@ export default defineConfig({
   ],
   jsPlugins: [
     { name: 'anti-slop', specifier: './tools/oxlint/anti-slop/index.ts' },
+    { name: '@stylexjs', specifier: '@stylexjs/eslint-plugin' },
   ],
   rules: {
     'anti-slop/no-chained-type-assertions': 'error',
@@ -63,5 +64,9 @@ export default defineConfig({
     'anti-slop/no-unsafe-dictionary-type': 'error',
     'anti-slop/no-widen-then-assert': 'error',
     'anti-slop/require-safety-comment-for-type-assertion': 'error',
+    '@stylexjs/valid-styles': 'error',
+    '@stylexjs/no-unused': 'error',
+    '@stylexjs/valid-shorthands': 'warn',
+    '@stylexjs/sort-keys': 'warn',
   },
 });
