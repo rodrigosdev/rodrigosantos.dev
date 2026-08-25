@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "typecheck": "bun node_modules/typescript/bin/tsc --noEmit"
   },
   "dependencies": {
     "next": "16.3.2",
