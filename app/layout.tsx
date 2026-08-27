@@ -1,66 +1,35 @@
 import * as stylex from '@stylexjs/stylex';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 
-import './globals.css';
+import { globalTokens as $ } from '~/app/global-tokens.stylex';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
+import './app.css';
 
 export const metadata: Metadata = {
   title: 'Rodrigo Santos',
   description: '...',
 };
 
-const DARK = '@media (prefers-color-scheme: dark)' as const;
+const RootLayout = ({ children }: LayoutProps<'/'>) => {
+  return (
+    <html {...stylex.props(styles.html, styles.reset)} lang="en">
+      <body {...stylex.props(styles.reset, styles.body)}>{children}</body>
+    </html>
+  );
+};
 
 const styles = stylex.create({
   html: {
-    colorScheme: {
-      [DARK]: 'dark',
-      default: 'light',
-    },
-    height: '100%',
-    maxWidth: '100vw',
-    overflowX: 'hidden',
+    colorScheme: 'light dark',
+  },
+  reset: {
+    minHeight: '100%',
+    padding: 0,
+    margin: 0,
   },
   body: {
-    MozOsxFontSmoothing: 'grayscale',
-    WebkitFontSmoothing: 'antialiased',
-    backgroundColor: {
-      [DARK]: '#0a0a0a',
-      default: '#ffffff',
-    },
-    color: {
-      [DARK]: '#ededed',
-      default: '#171717',
-    },
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: 'Arial, Helvetica, sans-serif',
-    maxWidth: '100vw',
-    minHeight: '100%',
-    overflowX: 'hidden',
+    backgroundColor: $.surfaceBg,
   },
 });
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
-  const htmlProps = stylex.props(styles.html);
-  const bodyProps = stylex.props(styles.body);
-  const fontClassName = `${geistSans.variable} ${geistMono.variable}`;
-  const htmlClassName =
-    htmlProps.className == null ? fontClassName : `${fontClassName} ${htmlProps.className}`;
-
-  return (
-    <html lang="en" {...htmlProps} className={htmlClassName}>
-      <body {...bodyProps}>{children}</body>
-    </html>
-  );
-}
+export default RootLayout;
