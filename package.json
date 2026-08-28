@@ -11,7 +11,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt",
-    "typecheck": "bun node_modules/typescript/bin/tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@stylexjs/stylex": "^0.19.0",
@@ -34,15 +34,7 @@
     "typescript": "^7.0.2"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx,mjs,cjs}": "bun run lint"
+    "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm lint"
   },
-  "packageManager": "bun@1.4.0",
-  "ignoreScripts": [
-    "sharp",
-    "unrs-resolver"
-  ],
-  "trustedDependencies": [
-    "sharp",
-    "unrs-resolver"
-  ]
+  "packageManager": "pnpm@11.24.0"
 }

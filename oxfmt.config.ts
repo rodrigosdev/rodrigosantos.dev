@@ -27,7 +27,7 @@ export default defineConfig({
     'dist/**',
     'public/**',
     '.vercel/**',
-    'bun.lock',
+    'pnpm-lock.yaml',
     'tools/oxlint/anti-slop/**',
   ],
 });
