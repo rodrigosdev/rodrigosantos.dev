@@ -1,4 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistPixelSquare } from 'geist/font/pixel';
 import { GeistSans } from 'geist/font/sans';
@@ -29,7 +31,11 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
       }
       lang="en"
     >
-      <body {...stylex.props(styles.reset, styles.body)}>{children}</body>
+      <body {...stylex.props(styles.reset, styles.body)}>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 };
