@@ -1,13 +1,15 @@
 import * as stylex from '@stylexjs/stylex';
 
-const styles = stylex.create({
-  heading: {
-    fontFamily: 'Arial, Helvetica, sans-serif',
-  },
-});
+import { globalTokens as $ } from '~/app/global-tokens.stylex';
 
 const Home = () => {
   return <h1 {...stylex.props(styles.heading)}>Hello World</h1>;
 };
+
+const styles = stylex.create({
+  heading: {
+    fontFamily: $.fontPixel,
+  },
+});
 
 export default Home;
