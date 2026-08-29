@@ -11,8 +11,39 @@ import { globalTokens as $ } from '~/app/global-tokens.stylex';
 import './app.css';
 
 export const metadata: Metadata = {
-  title: 'Rodrigo Santos',
-  description: '...',
+  metadataBase: new URL('https://rodrigosantos.dev'),
+  title: {
+    default: 'Rodrigo Santos',
+    template: '%s | Rodrigo Santos',
+  },
+  description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+  authors: [{ name: 'Rodrigo Santos', url: 'https://rodrigosantos.dev' }],
+  creator: 'Rodrigo Santos',
+  publisher: 'Rodrigo Santos',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Rodrigo Santos',
+    description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+    url: '/',
+    siteName: 'Rodrigo Santos',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@rrcssantos',
+    creator: '@rrcssantos',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 const RootLayout = ({ children }: LayoutProps<'/'>) => {
