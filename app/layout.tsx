@@ -57,7 +57,7 @@ const styles = stylex.create({
     colorScheme: 'light dark',
     minHeight: '100%',
     '::selection': {
-      backgroundColor: $.selection,
+      backgroundColor: `color-mix(in oklab, ${$.selection} 50%, transparent)`,
       color: $.textStrong,
     },
   },
