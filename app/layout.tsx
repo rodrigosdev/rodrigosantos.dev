@@ -16,22 +16,19 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: LayoutProps<'/'>) => {
-  const htmlProps = stylex.props(styles.html, styles.reset);
-  const fontVariables = [GeistSans.variable, GeistMono.variable, GeistPixelSquare.variable].join(
-    ' ',
-  );
-
   return (
     <html
-      {...htmlProps}
-      className={
-        htmlProps.className === undefined
-          ? fontVariables
-          : `${fontVariables} ${htmlProps.className}`
-      }
+      {...stylex.props(
+        styles.html,
+        styles.fonts(
+          GeistSans.style.fontFamily,
+          GeistMono.style.fontFamily,
+          GeistPixelSquare.style.fontFamily,
+        ),
+      )}
       lang="en"
     >
-      <body {...stylex.props(styles.reset, styles.body)}>
+      <body {...stylex.props(styles.body)}>
         {children}
         <Analytics />
         <SpeedInsights />
@@ -41,17 +38,28 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
 };
 
 const styles = stylex.create({
-  html: {
-    colorScheme: 'light dark',
-  },
-  reset: {
-    margin: 0,
-    padding: 0,
-    minHeight: '100%',
-  },
   body: {
-    backgroundColor: $.surfaceBg,
+    display: 'flex',
+    flexDirection: 'column',
     fontFamily: $.fontSans,
+    minHeight: '100vh',
+  },
+  fonts: (sans: string, mono: string, pixel: string) => ({
+    '--font-geist-mono': mono,
+    '--font-geist-pixel-square': pixel,
+    '--font-geist-sans': sans,
+  }),
+  html: {
+    MozOsxFontSmoothing: 'grayscale',
+    WebkitFontSmoothing: 'antialiased',
+    backgroundColor: $.surfaceBg,
+    color: $.textStrong,
+    colorScheme: 'light dark',
+    minHeight: '100%',
+    '::selection': {
+      backgroundColor: $.selection,
+      color: $.textStrong,
+    },
   },
 });
 
