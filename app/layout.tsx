@@ -55,6 +55,10 @@ const styles = stylex.create({
     backgroundColor: $.surfaceBg,
     color: $.textStrong,
     colorScheme: 'light dark',
+    transitionDuration: '150ms',
+    transitionProperty:
+      'color, background-color, border-color, outline-color, text-decoration-color, fill, stroke',
+    transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
     minHeight: '100%',
     '::selection': {
       backgroundColor: `color-mix(in oklab, ${$.selection} 50%, transparent)`,
