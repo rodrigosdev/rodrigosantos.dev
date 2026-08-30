@@ -7,24 +7,22 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const triangleSrc = `data:image/svg+xml,${encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 21"><polygon points="12,0 24,21 0,21" fill="#fff"/></svg>',
+const circleSrc = `data:image/svg+xml,${encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#000"/></svg>',
 )}`;
 
 export default function Icon() {
   return new ImageResponse(
     <div
       style={{
-        alignItems: 'center',
-        background: '#000',
+        background: 'transparent',
         display: 'flex',
         height: '100%',
-        justifyContent: 'center',
         width: '100%',
       }}
     >
       {/* oxlint-disable-next-line next/no-img-element -- next/image is not supported inside ImageResponse */}
-      <img alt="" height={21} src={triangleSrc} width={24} />
+      <img alt="" height={48} src={circleSrc} width={48} />
     </div>,
     {
       ...size,
