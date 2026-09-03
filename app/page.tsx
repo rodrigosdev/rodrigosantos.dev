@@ -1,27 +1,15 @@
-import * as stylex from '@stylexjs/stylex';
-
-import { globalTokens as $ } from '~/app/global-tokens.stylex';
+import { About } from '~/components/about';
+import { Container } from '~/components/container';
+import { Inset } from '~/components/inset';
 
 const Home = () => {
   return (
-    <>
-      <h1 {...stylex.props(styles.heading)}>Hello World</h1>
-      <p {...stylex.props(styles.paragraph)}>Hello World</p>
-      <code {...stylex.props(styles.mono)}>Hello World</code>
-    </>
+    <Container>
+      <Inset>
+        <About />
+      </Inset>
+    </Container>
   );
 };
-
-const styles = stylex.create({
-  heading: {
-    fontFamily: $.fontPixel,
-  },
-  paragraph: {
-    fontFamily: $.fontSans,
-  },
-  mono: {
-    fontFamily: $.fontMono,
-  },
-});
 
 export default Home;

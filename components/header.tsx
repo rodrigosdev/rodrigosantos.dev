@@ -1,14 +1,14 @@
 import * as stylex from '@stylexjs/stylex';
 import Link from 'next/link';
 
-import { globalTokens as $, spacing, text } from '~/app/global-tokens.stylex';
+import { globalTokens as $, spacing } from '~/app/global-tokens.stylex';
 import { utils } from '~/styles/utils';
 
 const Header = () => {
   return (
     <header {...stylex.props(styles.header)}>
       <div {...stylex.props(styles.container)}>
-        <Link href="/" {...stylex.props(styles.link, utils.focusText)}>
+        <Link href="/" {...stylex.props(styles.link, utils.h2, utils.focusText)}>
           Rodrigo Santos
         </Link>
         <p {...stylex.props(styles.subtitle)}>AI Engineer</p>
@@ -31,10 +31,6 @@ const styles = stylex.create({
   },
   link: {
     textDecoration: 'none',
-    color: $.textStrong,
-    fontFamily: $.fontPixel,
-    fontSize: text.p,
-    fontWeight: 500,
   },
   subtitle: {
     color: $.textSoft,
