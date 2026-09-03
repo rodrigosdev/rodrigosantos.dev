@@ -3,7 +3,11 @@ import babelConfig from './babel.config.js';
 const config = {
   plugins: {
     '@stylexjs/postcss-plugin': {
-      include: ['app/**/*.{js,jsx,ts,tsx}', 'components/**/*.{js,jsx,ts,tsx}'],
+      include: [
+        'app/**/*.{js,jsx,ts,tsx}',
+        'components/**/*.{js,jsx,ts,tsx}',
+        'styles/**/*.{js,jsx,ts,tsx}',
+      ],
       babelConfig: {
         babelrc: false,
         parserOpts: { plugins: ['typescript', 'jsx'] },
