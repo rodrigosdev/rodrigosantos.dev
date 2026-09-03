@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next';
 
 import { globalTokens as $ } from '~/app/global-tokens.stylex';
 import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
+import { Header } from '~/components/header';
 
 import './app.css';
 
@@ -73,6 +74,7 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: serializeJsonLd() }}
         />
+        <Header />
         {children}
         <Analytics />
         <SpeedInsights />
@@ -85,7 +87,6 @@ const styles = stylex.create({
   body: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: $.fontSans,
     minHeight: '100vh',
   },
   fonts: (sans: string, mono: string, pixel: string) => ({
@@ -99,6 +100,7 @@ const styles = stylex.create({
     backgroundColor: $.surfaceBg,
     color: $.textStrong,
     colorScheme: 'light dark',
+    fontFamily: $.fontSans,
     transitionDuration: '150ms',
     transitionProperty:
       'color, background-color, border-color, outline-color, text-decoration-color, fill, stroke',

@@ -203,6 +203,8 @@ export const globalTokens = stylex.defineVars({
 
   easeBounce: 'cubic-bezier(0.2, -0.25, 0, 1.6)',
   easeBounceLite: 'cubic-bezier(0, 0, 0, 1.1)',
+
+  containerWidth: '42rem',
 });
 
 export const scales = stylex.defineVars({
