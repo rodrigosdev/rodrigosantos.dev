@@ -4,15 +4,55 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { GeistMono } from 'geist/font/mono';
 import { GeistPixelSquare } from 'geist/font/pixel';
 import { GeistSans } from 'geist/font/sans';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 import { globalTokens as $ } from '~/app/global-tokens.stylex';
+import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
 
 import './app.css';
 
 export const metadata: Metadata = {
-  title: 'Rodrigo Santos',
-  description: '...',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: SITE_NAME,
+    description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+    url: '/',
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@rrcssantos',
+    creator: '@rrcssantos',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafafa' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
 };
 
 const RootLayout = ({ children }: LayoutProps<'/'>) => {
@@ -29,6 +69,10 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
       lang="en"
     >
       <body {...stylex.props(styles.body)}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd() }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />
