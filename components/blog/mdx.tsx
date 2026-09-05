@@ -134,6 +134,18 @@ const MdxLink = ({ children, href }: MdxLinkProps) => {
     );
   }
 
+  if (href === '/' || href === '/blog') {
+    return (
+      <Link
+        href={href}
+        transitionTypes={['nav-back']}
+        {...stylex.props(utils.link, utils.focusText)}
+      >
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <Link href={href} {...stylex.props(utils.link, utils.focusText)}>
       {children}

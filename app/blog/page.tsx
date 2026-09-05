@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { color, tokens } from '~/app/global-tokens.stylex';
 import { BlogFrame } from '~/components/blog/frame';
 import { PostList } from '~/components/blog/post-list';
+import { DirectionalTransition } from '~/components/directional-transition';
 import { getPosts } from '~/lib/blog';
 
 export const metadata: Metadata = {
@@ -16,10 +17,12 @@ const BlogPage = async () => {
   const posts = await getPosts();
 
   return (
-    <BlogFrame backHref="/" backLabel="Home">
-      <h1 {...stylex.props(styles.title)}>Blog</h1>
-      <PostList posts={posts} />
-    </BlogFrame>
+    <DirectionalTransition>
+      <BlogFrame backHref="/" backLabel="Home">
+        <h1 {...stylex.props(styles.title)}>Blog</h1>
+        <PostList posts={posts} />
+      </BlogFrame>
+    </DirectionalTransition>
   );
 };
 

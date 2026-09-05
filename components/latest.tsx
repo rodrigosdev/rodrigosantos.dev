@@ -10,7 +10,7 @@ const Latest = () => {
       <h2 {...stylex.props(utils.h2)}>Latest</h2>
       <p {...stylex.props(utils.p)}>
         On the side, I'm building <Redacted /> and constantly yapping on my{' '}
-        <TextLink href="/blog" title="blog" />.
+        <TextLink href="/blog" title="blog" transitionTypes={['nav-forward']} />.
       </p>
     </>
   );

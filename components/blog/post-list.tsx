@@ -1,7 +1,9 @@
 import * as stylex from '@stylexjs/stylex';
 import Link from 'next/link';
+import { ViewTransition } from 'react';
 
 import { color, spacing, text, tokens } from '~/app/global-tokens.stylex';
+import { postTitleName } from '~/components/directional-transition';
 import { formatIndexDate, type Post } from '~/lib/blog';
 import { utils } from '~/styles/utils';
 
@@ -25,16 +27,10 @@ const Arrow = () => (
 
 const PostRow = ({ post, showYear }: { post: Post; showYear: boolean }) => {
   const year = post.date.slice(0, 4);
-  const contents = (
-    <>
-      <span {...stylex.props(styles.title)}>
-        {post.title}
-        {post.external === null ? null : <Arrow />}
-      </span>
-      <time dateTime={post.date} {...stylex.props(styles.date)}>
-        {formatIndexDate(post.date)}
-      </time>
-    </>
+  const date = (
+    <time dateTime={post.date} {...stylex.props(styles.date)}>
+      {formatIndexDate(post.date)}
+    </time>
   );
 
   return (
@@ -44,9 +40,13 @@ const PostRow = ({ post, showYear }: { post: Post; showYear: boolean }) => {
         <Link
           href={`/blog/${post.slug}`}
           prefetch
+          transitionTypes={['nav-forward']}
           {...stylex.props(styles.link, utils.focusText)}
         >
-          {contents}
+          <ViewTransition default="none" name={postTitleName(post.slug)} share="text-morph">
+            <span {...stylex.props(styles.title)}>{post.title}</span>
+          </ViewTransition>
+          {date}
         </Link>
       ) : (
         <a
@@ -55,7 +55,11 @@ const PostRow = ({ post, showYear }: { post: Post; showYear: boolean }) => {
           target="_blank"
           {...stylex.props(styles.link, utils.focusText)}
         >
-          {contents}
+          <span {...stylex.props(styles.title)}>
+            {post.title}
+            <Arrow />
+          </span>
+          {date}
         </a>
       )}
     </div>

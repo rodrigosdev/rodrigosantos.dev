@@ -28,7 +28,7 @@ const Chevron = () => (
 );
 
 const BackLink = ({ href, label }: { href: '/' | '/blog'; label: string }) => (
-  <Link href={href} {...stylex.props(styles.back, utils.focusText)}>
+  <Link href={href} transitionTypes={['nav-back']} {...stylex.props(styles.back, utils.focusText)}>
     <Chevron />
     {label}
   </Link>

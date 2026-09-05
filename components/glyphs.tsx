@@ -15,11 +15,7 @@ const Glyph = ({ chars }: { chars: readonly [string, string, string] }) => (
   </span>
 );
 
-const Glyphs = ({
-  sequences,
-}: {
-  sequences: ReadonlyArray<readonly [string, string, string]>;
-}) => (
+const Glyphs = ({ sequences }: { sequences: ReadonlyArray<readonly [string, string, string]> }) => (
   <>
     {sequences.map((chars, index) => (
       <Glyph chars={chars} key={index} />

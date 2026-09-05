@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, ViewTransition } from 'react';
 
 import { color, spacing, text, tokens } from '~/app/global-tokens.stylex';
 import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
 import { BlogFrame } from '~/components/blog/frame';
 import { PostBody } from '~/components/blog/post-body';
+import { DirectionalTransition, postTitleName } from '~/components/directional-transition';
 import { formatPostDate, getLocalPosts, getPost } from '~/lib/blog';
 
 export const generateStaticParams = async () => {
@@ -49,15 +50,19 @@ const BlogPost = async ({ params }: PageProps<'/blog/[slug]'>) => {
 
   return (
     <>
-      <article>
-        <h1 {...stylex.props(styles.title)}>{post.title}</h1>
-        <time dateTime={post.date} {...stylex.props(styles.date)}>
-          {formatPostDate(post.date)}
-        </time>
-        <div {...stylex.props(styles.body)}>
-          <PostBody source={post.body} />
-        </div>
-      </article>
+      <ViewTransition default="none" enter="slide-up" key={slug} name="post-article" share="auto">
+        <article>
+          <ViewTransition default="none" name={postTitleName(post.slug)} share="text-morph">
+            <h1 {...stylex.props(styles.title)}>{post.title}</h1>
+          </ViewTransition>
+          <time dateTime={post.date} {...stylex.props(styles.date)}>
+            {formatPostDate(post.date)}
+          </time>
+          <div {...stylex.props(styles.body)}>
+            <PostBody source={post.body} />
+          </div>
+        </article>
+      </ViewTransition>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -78,11 +83,13 @@ const BlogPost = async ({ params }: PageProps<'/blog/[slug]'>) => {
 
 const BlogPostPage = (props: PageProps<'/blog/[slug]'>) => {
   return (
-    <BlogFrame backHref="/blog" backLabel="Blog">
-      <Suspense fallback={<div {...stylex.props(styles.fallback)} />}>
-        <BlogPost {...props} />
-      </Suspense>
-    </BlogFrame>
+    <DirectionalTransition>
+      <BlogFrame backHref="/blog" backLabel="Blog">
+        <Suspense fallback={<div {...stylex.props(styles.fallback)} />}>
+          <BlogPost {...props} />
+        </Suspense>
+      </BlogFrame>
+    </DirectionalTransition>
   );
 };
 
