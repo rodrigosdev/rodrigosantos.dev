@@ -23,6 +23,7 @@ const OpenGraphImage = async (props: { params: Promise<{ slug: string }> }) => {
   return renderOgImage({
     description: formatPostDate(post.date),
     kicker: 'Blog',
+    role: null,
     title: post.title,
   });
 };
