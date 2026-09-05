@@ -3,7 +3,7 @@
 import * as stylex from '@stylexjs/stylex';
 import { useState } from 'react';
 
-import { globalTokens as $ } from '~/app/global-tokens.stylex';
+import { tokens } from '~/app/global-tokens.stylex';
 import { utils } from '~/styles/utils';
 
 import { Chat } from './chat';
@@ -58,7 +58,7 @@ const styles = stylex.create({
     backgroundColor: 'transparent',
     color: 'inherit',
     cursor: 'help',
-    fontFamily: $.fontMono,
+    fontFamily: tokens.fontMono,
     lineHeight: 1,
     position: 'relative',
     userSelect: 'none',

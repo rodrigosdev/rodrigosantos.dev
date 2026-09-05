@@ -2,7 +2,7 @@
 
 import * as stylex from '@stylexjs/stylex';
 
-import { globalTokens as $, spacing, text } from '~/app/global-tokens.stylex';
+import { color, spacing, text, tokens } from '~/app/global-tokens.stylex';
 
 const pulse = stylex.keyframes({
   '0%': { opacity: 1 },
@@ -42,7 +42,7 @@ const reveal = stylex.keyframes({
 const revealFollowup = stylex.keyframes({
   from: {
     opacity: 0,
-    transform: `translateY(${spacing.xxs})`,
+    transform: `translateY(${spacing.sm})`,
     visibility: 'hidden',
     marginTop: 0,
     maxHeight: 0,
@@ -51,8 +51,8 @@ const revealFollowup = stylex.keyframes({
     opacity: 1,
     transform: 'translateY(0)',
     visibility: 'visible',
-    marginTop: spacing.xxs,
-    maxHeight: spacing.xxl,
+    marginTop: spacing.sm,
+    maxHeight: spacing.xxxl,
   },
 });
 
@@ -77,24 +77,12 @@ const Message = ({
   typingUntil: '1s' | '3s';
 }) => (
   <div {...stylex.props(styles.bubble, enter && styles.revealXs)}>
-    <div
-      {...stylex.props(
-        styles.typing,
-        active && (typingUntil === '1s' ? styles.hideTypingAt1s : styles.hideTypingAt3s),
-      )}
-    >
+    <div {...stylex.props(styles.typing, active && styles.hideTyping(typingUntil))}>
       <Dot />
       <Dot delay={100} />
       <Dot delay={200} />
     </div>
-    <span
-      {...stylex.props(
-        styles.text,
-        active && (typingUntil === '1s' ? styles.showTextAt1s : styles.showTextAt3s),
-      )}
-    >
-      {text}
-    </span>
+    <span {...stylex.props(styles.text, active && styles.showText(typingUntil))}>{text}</span>
   </div>
 );
 
@@ -120,7 +108,7 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'none',
     },
     flexDirection: 'column',
-    fontFamily: $.fontSans,
+    fontFamily: tokens.fontSans,
     justifyContent: 'flex-end',
     opacity: 0,
     position: 'absolute',
@@ -134,12 +122,12 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': '0ms',
     },
     transitionProperty: 'filter, opacity, transform, visibility',
-    transitionTimingFunction: $.easeBounce,
+    transitionTimingFunction: tokens.bounce,
     visibility: 'hidden',
     whiteSpace: 'nowrap',
     bottom: '100%',
     left: 0,
-    marginBottom: spacing.xxs,
+    marginBottom: spacing.sm,
     width: 'max-content',
   },
   rootActive: {
@@ -161,7 +149,7 @@ const styles = stylex.create({
   },
   followup: {
     overflow: 'hidden',
-    marginTop: spacing.xxs,
+    marginTop: spacing.sm,
     width: 'max-content',
   },
   followupActive: {
@@ -178,7 +166,7 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 1,
     },
     transform: {
-      default: `translateY(${spacing.xxs})`,
+      default: `translateY(${spacing.sm})`,
       '@media (prefers-reduced-motion: reduce)': 'translateY(0)',
     },
   },
@@ -195,80 +183,62 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 1,
     },
     transform: {
-      default: `translateY(${spacing.xxs})`,
+      default: `translateY(${spacing.sm})`,
       '@media (prefers-reduced-motion: reduce)': 'translateY(0)',
     },
   },
   bubble: {
-    borderRadius: spacing.xs,
+    borderRadius: spacing.md,
     overflow: 'hidden',
     alignItems: 'center',
-    backgroundColor: $.base200,
-    color: $.textStrong,
+    backgroundColor: color.fill,
+    color: color.text,
     display: 'flex',
     fontSize: text.sm,
     lineHeight: 1.625,
     position: 'relative',
     textAlign: 'left',
     whiteSpace: 'nowrap',
-    paddingBottom: spacing.xxxs,
-    paddingLeft: spacing.xs,
-    paddingRight: spacing.xs,
-    paddingTop: spacing.xxxs,
+    paddingBottom: spacing.xs,
+    paddingLeft: spacing.md,
+    paddingRight: spacing.md,
+    paddingTop: spacing.xs,
     width: 'max-content',
   },
   typing: {
-    gap: spacing.xxxs,
+    gap: spacing.xs,
     alignItems: 'center',
     display: 'flex',
     position: 'absolute',
     visibility: 'hidden',
-    height: spacing.md,
+    height: spacing.lg,
   },
-  hideTypingAt1s: {
-    animationDelay: '1s',
+  hideTyping: (delay: '1s' | '3s') => ({
+    animationDelay: delay,
     animationDuration: '0s',
     animationFillMode: 'both',
     animationName: {
       default: hideTyping,
       '@media (prefers-reduced-motion: reduce)': 'none',
     },
-  },
-  hideTypingAt3s: {
-    animationDelay: '3s',
-    animationDuration: '0s',
-    animationFillMode: 'both',
-    animationName: {
-      default: hideTyping,
-      '@media (prefers-reduced-motion: reduce)': 'none',
-    },
-  },
+  }),
   text: {
     alignItems: 'center',
     display: 'flex',
     lineHeight: 1.625,
     position: 'static',
     visibility: 'visible',
-    minHeight: spacing.md,
+    minHeight: spacing.lg,
   },
-  showTextAt1s: {
-    animationDelay: '1s',
+  showText: (delay: '1s' | '3s') => ({
+    animationDelay: delay,
     animationDuration: '0s',
     animationFillMode: 'both',
     animationName: {
       default: showText,
       '@media (prefers-reduced-motion: reduce)': 'none',
     },
-  },
-  showTextAt3s: {
-    animationDelay: '3s',
-    animationDuration: '0s',
-    animationFillMode: 'both',
-    animationName: {
-      default: showText,
-      '@media (prefers-reduced-motion: reduce)': 'none',
-    },
-  },
+  }),
   dot: {
     borderRadius: '50%',
     animationDuration: '2s',
@@ -278,9 +248,9 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'none',
     },
     animationTimingFunction: 'cubic-bezier(0.4, 0, 0.6, 1)',
-    backgroundColor: `color-mix(in oklab, ${$.base1000} 50%, transparent)`,
-    height: spacing.xxs,
-    width: spacing.xxs,
+    backgroundColor: `color-mix(in oklab, ${color.ink} 50%, transparent)`,
+    height: spacing.sm,
+    width: spacing.sm,
   },
   dotDelay: (delay: number) => ({
     animationDelay: `${delay}ms`,

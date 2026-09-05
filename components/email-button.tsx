@@ -3,9 +3,9 @@
 import * as stylex from '@stylexjs/stylex';
 import { useEffect, useState } from 'react';
 
-import { globalTokens as $, spacing } from '~/app/global-tokens.stylex';
+import { color, spacing } from '~/app/global-tokens.stylex';
 import { SITE_EMAIL } from '~/app/site';
-import { TextLink } from '~/components/text-link';
+import { utils } from '~/styles/utils';
 
 const reveal = stylex.keyframes({
   to: {
@@ -65,7 +65,13 @@ const EmailButton = () => {
           </div>
         </div>
       ) : null}
-      <TextLink as="button" onClick={copyText} style={styles.link} title="Email" type="button" />
+      <button
+        onClick={copyText}
+        type="button"
+        {...stylex.props(utils.link, utils.focusText, styles.link)}
+      >
+        Email
+      </button>
     </div>
   );
 };
@@ -82,14 +88,14 @@ const styles = stylex.create({
       default: '-50%',
       '@media (min-width: 640px)': '50%',
     },
-    top: `calc(${spacing.lg} * -1)`,
+    top: `calc(${spacing.xl} * -1)`,
   },
   tooltip: {
-    borderColor: $.border,
+    borderColor: color.border,
     borderRadius: 8,
     borderStyle: 'solid',
     borderWidth: 1,
-    gap: spacing.xxxs,
+    gap: spacing.xs,
     alignItems: 'center',
     animationDuration: '0.25s',
     animationFillMode: 'forwards',
@@ -98,9 +104,9 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 'none',
     },
     animationTimingFunction: 'cubic-bezier(0.3, 0, 0, 1)',
-    backgroundColor: $.surfaceBgDepth,
-    boxShadow: `0 1px 2px color-mix(in oklab, ${$.base1000} 6%, transparent)`,
-    color: $.textStrong,
+    backgroundColor: color.surface,
+    boxShadow: `0 1px 2px color-mix(in oklab, ${color.ink} 6%, transparent)`,
+    color: color.text,
     display: 'flex',
     flexShrink: 0,
     opacity: {
@@ -108,14 +114,14 @@ const styles = stylex.create({
       '@media (prefers-reduced-motion: reduce)': 1,
     },
     transform: {
-      default: `translateY(${spacing.xxs})`,
+      default: `translateY(${spacing.sm})`,
       '@media (prefers-reduced-motion: reduce)': 'translateY(0)',
     },
     whiteSpace: 'nowrap',
-    paddingBottom: spacing.xxxs,
-    paddingLeft: spacing.xxs,
-    paddingRight: spacing.xs,
-    paddingTop: spacing.xxxs,
+    paddingBottom: spacing.xs,
+    paddingLeft: spacing.sm,
+    paddingRight: spacing.md,
+    paddingTop: spacing.xs,
     width: 'max-content',
   },
   icon: {
@@ -124,10 +130,10 @@ const styles = stylex.create({
     width: 16,
   },
   link: {
-    paddingBottom: spacing.xxxs,
-    paddingLeft: spacing.xs,
-    paddingRight: spacing.xs,
-    paddingTop: spacing.xxxs,
+    paddingBottom: spacing.xs,
+    paddingLeft: spacing.md,
+    paddingRight: spacing.md,
+    paddingTop: spacing.xs,
   },
 });
 

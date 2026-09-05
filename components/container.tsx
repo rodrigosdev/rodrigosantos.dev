@@ -1,11 +1,13 @@
 import * as stylex from '@stylexjs/stylex';
+import type { ReactNode } from 'react';
 
 import { spacing } from '~/app/global-tokens.stylex';
+import { utils } from '~/styles/utils';
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const Container = ({ children }: { children: ReactNode }) => {
   return (
     <main {...stylex.props(styles.main)}>
-      <section {...stylex.props(styles.section)}>{children}</section>
+      <div {...stylex.props(utils.inner)}>{children}</div>
     </main>
   );
 };
@@ -15,9 +17,10 @@ const styles = stylex.create({
     alignItems: 'start',
     display: 'flex',
     flexGrow: 1,
-  },
-  section: {
-    padding: `${spacing.xxl} ${spacing.md} ${spacing.xxl} ${spacing.md}`,
+    paddingBottom: spacing.xxxl,
+    paddingLeft: spacing.lg,
+    paddingRight: spacing.lg,
+    paddingTop: spacing.xxxl,
     width: '100%',
   },
 });

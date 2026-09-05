@@ -1,8 +1,10 @@
 export const SITE_URL = 'https://rodrigosantos.dev';
 export const SITE_NAME = 'Rodrigo Santos';
+export const SITE_DESCRIPTION = 'Research, experiments, writing, and work by Rodrigo Santos.';
 export const SITE_EMAIL = 'hello@rodrigosantos.dev';
 export const SITE_GITHUB_URL = 'https://github.com/rodrigosdev';
 export const SITE_LINKEDIN_URL = 'https://www.linkedin.com/in/rrcssantos/';
+export const SITE_SNYK_URL = 'https://snyk.io';
 export const SITE_X_URL = 'https://x.com/rrcssantos';
 
 export const jsonLd = {
@@ -17,7 +19,7 @@ export const jsonLd = {
       worksFor: {
         '@type': 'Organization',
         name: 'Snyk',
-        url: 'https://snyk.io',
+        url: SITE_SNYK_URL,
       },
       sameAs: [SITE_GITHUB_URL, SITE_LINKEDIN_URL, SITE_X_URL],
     },

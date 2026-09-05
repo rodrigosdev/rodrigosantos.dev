@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 
+import { SITE_X_URL } from '~/app/site';
 import { TextLink } from '~/components/text-link';
 import { utils } from '~/styles/utils';
 
@@ -8,8 +9,8 @@ const Connect = () => {
     <>
       <h2 {...stylex.props(utils.h2)}>Connect</h2>
       <p {...stylex.props(utils.p)}>
-        You can find me on <TextLink href="https://x.com/rrcssantos" title="X" external />, feel
-        free to send a dm.
+        You can find me on <TextLink external href={SITE_X_URL} title="X" />, feel free to send a
+        dm.
       </p>
     </>
   );

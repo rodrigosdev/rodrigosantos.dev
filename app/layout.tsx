@@ -6,8 +6,8 @@ import { GeistPixelSquare } from 'geist/font/pixel';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from 'next';
 
-import { globalTokens as $ } from '~/app/global-tokens.stylex';
-import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
+import { color, tokens } from '~/app/global-tokens.stylex';
+import { serializeJsonLd, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '~/app/site';
 import { Footer } from '~/components/footer';
 import { Header } from '~/components/header';
 
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
   },
-  description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+  description: SITE_DESCRIPTION,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
   alternates: { canonical: '/' },
   openGraph: {
     title: SITE_NAME,
-    description: 'Research, experiments, writing, and work by Rodrigo Santos.',
+    description: SITE_DESCRIPTION,
     url: '/',
     siteName: SITE_NAME,
     locale: 'en_US',
@@ -99,18 +99,18 @@ const styles = stylex.create({
   html: {
     MozOsxFontSmoothing: 'grayscale',
     WebkitFontSmoothing: 'antialiased',
-    backgroundColor: $.surfaceBg,
-    color: $.textStrong,
+    backgroundColor: color.bg,
+    color: color.text,
     colorScheme: 'light dark',
-    fontFamily: $.fontSans,
+    fontFamily: tokens.fontSans,
     transitionDuration: '150ms',
     transitionProperty:
       'color, background-color, border-color, outline-color, text-decoration-color, fill, stroke',
     transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
     minHeight: '100%',
     '::selection': {
-      backgroundColor: `color-mix(in oklab, ${$.selection} 50%, transparent)`,
-      color: $.textStrong,
+      backgroundColor: `color-mix(in oklab, ${color.selection} 50%, transparent)`,
+      color: color.text,
     },
   },
 });
