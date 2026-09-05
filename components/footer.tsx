@@ -32,7 +32,7 @@ const styles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-    paddingBottom: spacing.xxxl,
+    paddingBottom: spacing.lg,
     paddingLeft: spacing.lg,
     paddingRight: spacing.lg,
     paddingTop: spacing.xxxl,
