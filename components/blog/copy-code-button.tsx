@@ -3,7 +3,8 @@
 import * as stylex from '@stylexjs/stylex';
 
 import { color, spacing, text, tokens } from '~/app/global-tokens.stylex';
-import { IconClipboard, useCopyFeedback } from '~/components/copied-tooltip';
+import { IconClipboard } from '~/components/copied-tooltip';
+import { useCopyFeedback } from '~/components/copy-feedback';
 import { utils } from '~/styles/utils';
 
 type CopyCodeButtonProps = {
@@ -37,7 +38,7 @@ const styles = stylex.create({
     color: {
       default: color.textMuted,
       ':hover': {
-        default: color.text,
+        default: null,
         '@media (hover: hover)': color.text,
       },
     },

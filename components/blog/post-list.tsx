@@ -25,43 +25,39 @@ const Arrow = () => (
 
 const PostRow = ({ post, showYear }: { post: Post; showYear: boolean }) => {
   const year = post.date.slice(0, 4);
-  const date = formatIndexDate(post.date);
-  const title = (
-    <span {...stylex.props(styles.title)}>
-      {post.title}
-      {post.external === null ? null : <Arrow />}
-    </span>
+  const contents = (
+    <>
+      <span {...stylex.props(styles.title)}>
+        {post.title}
+        {post.external === null ? null : <Arrow />}
+      </span>
+      <time dateTime={post.date} {...stylex.props(styles.date)}>
+        {formatIndexDate(post.date)}
+      </time>
+    </>
   );
-  const time = (
-    <time dateTime={post.date} {...stylex.props(styles.date)}>
-      {date}
-    </time>
-  );
-
-  if (post.external === null) {
-    return (
-      <div {...stylex.props(styles.row)}>
-        <span {...stylex.props(styles.year)}>{showYear ? year : null}</span>
-        <Link href={`/blog/${post.slug}`} {...stylex.props(styles.link, utils.focusText)}>
-          {title}
-          {time}
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <div {...stylex.props(styles.row)}>
       <span {...stylex.props(styles.year)}>{showYear ? year : null}</span>
-      <a
-        href={post.external}
-        rel="noopener noreferrer"
-        target="_blank"
-        {...stylex.props(styles.link, utils.focusText)}
-      >
-        {title}
-        {time}
-      </a>
+      {post.external === null ? (
+        <Link
+          href={`/blog/${post.slug}`}
+          prefetch
+          {...stylex.props(styles.link, utils.focusText)}
+        >
+          {contents}
+        </Link>
+      ) : (
+        <a
+          href={post.external}
+          rel="noopener noreferrer"
+          target="_blank"
+          {...stylex.props(styles.link, utils.focusText)}
+        >
+          {contents}
+        </a>
+      )}
     </div>
   );
 };

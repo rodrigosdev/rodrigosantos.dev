@@ -38,13 +38,10 @@ const BlogFrame = ({ backHref, backLabel, children }: BlogFrameProps) => {
   return (
     <main {...stylex.props(styles.main)}>
       <div {...stylex.props(styles.shell)}>
-        <aside {...stylex.props(styles.aside)}>
+        <nav {...stylex.props(styles.nav)}>
           <BackLink href={backHref} label={backLabel} />
-        </aside>
-        <p {...stylex.props(styles.mobileNav)}>
-          <BackLink href={backHref} label={backLabel} />
-        </p>
-        <div {...stylex.props(styles.content)}>{children}</div>
+        </nav>
+        {children}
       </div>
     </main>
   );
@@ -68,26 +65,32 @@ const styles = stylex.create({
     maxWidth: '36rem',
     width: '100%',
   },
-  aside: {
-    display: {
-      [DESKTOP]: 'block',
-      default: 'none',
+  nav: {
+    display: 'block',
+    position: {
+      [DESKTOP]: 'absolute',
+      default: 'static',
     },
-    position: 'absolute',
-    paddingRight: spacing.lg,
-    right: '100%',
-    top: 0,
-    width: 'max-content',
-  },
-  mobileNav: {
-    display: {
-      [DESKTOP]: 'none',
-      default: 'block',
+    marginBottom: {
+      [DESKTOP]: 0,
+      default: spacing.md,
     },
-    marginBottom: spacing.md,
-  },
-  content: {
-    width: '100%',
+    paddingRight: {
+      [DESKTOP]: spacing.lg,
+      default: null,
+    },
+    right: {
+      [DESKTOP]: '100%',
+      default: null,
+    },
+    top: {
+      [DESKTOP]: 0,
+      default: null,
+    },
+    width: {
+      [DESKTOP]: 'max-content',
+      default: null,
+    },
   },
   back: {
     gap: spacing.xs,

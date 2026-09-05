@@ -28,12 +28,7 @@ type MdxClassChildrenProps = {
 
 type MdxInputProps = {
   checked?: boolean;
-  disabled?: boolean;
   type?: string;
-};
-
-type MdxTableCellProps = {
-  children?: ReactNode;
 };
 
 const fenceLanguage = (className: string | undefined): string => {
@@ -98,7 +93,7 @@ const MdxItem = ({ children, className }: MdxClassChildrenProps) => (
   </li>
 );
 
-const MdxInput = ({ checked, disabled, type }: MdxInputProps) => {
+const MdxInput = ({ checked, type }: MdxInputProps) => {
   if (type !== 'checkbox') {
     return null;
   }
@@ -106,7 +101,7 @@ const MdxInput = ({ checked, disabled, type }: MdxInputProps) => {
   return (
     <input
       defaultChecked={checked === true}
-      disabled={disabled === true}
+      disabled
       readOnly
       type="checkbox"
       {...stylex.props(styles.checkbox)}
@@ -173,11 +168,11 @@ const MdxTableHead = ({ children }: MdxChildrenProps) => (
 
 const MdxRow = ({ children }: MdxChildrenProps) => <tr>{children}</tr>;
 
-const MdxHeaderCell = ({ children }: MdxTableCellProps) => (
+const MdxHeaderCell = ({ children }: MdxChildrenProps) => (
   <th {...stylex.props(styles.th)}>{children}</th>
 );
 
-const MdxCell = ({ children }: MdxTableCellProps) => (
+const MdxCell = ({ children }: MdxChildrenProps) => (
   <td {...stylex.props(styles.td)}>{children}</td>
 );
 

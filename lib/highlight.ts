@@ -1,34 +1,55 @@
 import { cacheLife } from 'next/cache';
-import { bundledLanguages, bundledLanguagesAlias, codeToHtml } from 'shiki';
-import type { BundledLanguage } from 'shiki';
+import { createHighlighterCore, isSpecialLang } from 'shiki/core';
+import type { HighlighterCore } from 'shiki/core';
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma';
 
 const THEMES = {
   dark: 'vitesse-dark',
   light: 'vitesse-light',
 } as const;
 
-const isBundledLanguage = (lang: string): lang is BundledLanguage => {
-  return Object.hasOwn(bundledLanguages, lang) || Object.hasOwn(bundledLanguagesAlias, lang);
+let highlighterPromise: Promise<HighlighterCore> | undefined;
+
+const getHighlighter = (): Promise<HighlighterCore> => {
+  highlighterPromise ??= createHighlighterCore({
+    engine: createOnigurumaEngine(import('shiki/wasm')),
+    langs: [
+      import('shiki/langs/css.mjs'),
+      import('shiki/langs/diff.mjs'),
+      import('shiki/langs/go.mjs'),
+      import('shiki/langs/graphql.mjs'),
+      import('shiki/langs/html.mjs'),
+      import('shiki/langs/javascript.mjs'),
+      import('shiki/langs/json.mjs'),
+      import('shiki/langs/python.mjs'),
+      import('shiki/langs/rust.mjs'),
+      import('shiki/langs/shellscript.mjs'),
+      import('shiki/langs/sql.mjs'),
+      import('shiki/langs/typescript.mjs'),
+      import('shiki/langs/yaml.mjs'),
+    ],
+    themes: [import('shiki/themes/vitesse-dark.mjs'), import('shiki/themes/vitesse-light.mjs')],
+  });
+
+  return highlighterPromise;
 };
 
-const resolveLanguage = (lang: string): BundledLanguage | 'text' => {
-  if (lang === '' || lang === 'plain' || lang === 'plaintext' || lang === 'txt') {
+const resolveLanguage = (lang: string, loaded: readonly string[]): string => {
+  if (lang === '' || isSpecialLang(lang) || !loaded.includes(lang)) {
     return 'text';
   }
 
-  if (isBundledLanguage(lang)) {
-    return lang;
-  }
-
-  return 'text';
+  return lang;
 };
 
 const highlightCode = async (code: string, lang: string): Promise<string> => {
   'use cache';
-  cacheLife('days');
+  cacheLife('max');
 
-  return codeToHtml(code, {
-    lang: resolveLanguage(lang),
+  const highlighter = await getHighlighter();
+
+  return highlighter.codeToHtml(code, {
+    lang: resolveLanguage(lang, highlighter.getLoadedLanguages()),
     themes: THEMES,
   });
 };

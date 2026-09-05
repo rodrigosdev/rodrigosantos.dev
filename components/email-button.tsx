@@ -4,7 +4,8 @@ import * as stylex from '@stylexjs/stylex';
 
 import { spacing } from '~/app/global-tokens.stylex';
 import { SITE_EMAIL } from '~/app/site';
-import { CopiedTooltip, useCopyFeedback } from '~/components/copied-tooltip';
+import { CopiedTooltip } from '~/components/copied-tooltip';
+import { useCopyFeedback } from '~/components/copy-feedback';
 import { utils } from '~/styles/utils';
 
 const EmailButton = () => {

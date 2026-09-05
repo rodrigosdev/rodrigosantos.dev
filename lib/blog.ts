@@ -112,21 +112,19 @@ const parsePost = (slug: string, source: string): Post => {
 
 const loadPosts = async (): Promise<Post[]> => {
   const names = await readdir(BLOG_DIR);
-  const posts: Post[] = [];
+  const posts = await Promise.all(
+    names
+      .filter((name) => name.endsWith('.mdx'))
+      .map(async (name) => {
+        const slug = name.slice(0, -4);
+        if (!SLUG_PATTERN.test(slug)) {
+          throw new Error(`Invalid blog slug: ${slug}`);
+        }
 
-  for (const name of names) {
-    if (!name.endsWith('.mdx')) {
-      continue;
-    }
-
-    const slug = name.slice(0, -4);
-    if (!SLUG_PATTERN.test(slug)) {
-      throw new Error(`Invalid blog slug: ${slug}`);
-    }
-
-    const source = await readFile(path.join(BLOG_DIR, name), 'utf8');
-    posts.push(parsePost(slug, source));
-  }
+        const source = await readFile(path.join(BLOG_DIR, name), 'utf8');
+        return parsePost(slug, source);
+      }),
+  );
 
   posts.sort((left, right) => {
     if (left.date === right.date) {
@@ -140,7 +138,7 @@ const loadPosts = async (): Promise<Post[]> => {
 
 export const getPosts = async (): Promise<readonly Post[]> => {
   'use cache';
-  cacheLife('days');
+  cacheLife('max');
   return loadPosts();
 };
 
@@ -164,19 +162,25 @@ export const getPost = async (slug: string): Promise<Post | null> => {
   return null;
 };
 
+const toUtcDate = (isoDate: string): Date => new Date(`${isoDate}T00:00:00.000Z`);
+
+const indexDateFormatter = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'short',
+  timeZone: 'UTC',
+});
+
+const postDateFormatter = new Intl.DateTimeFormat('en-US', {
+  day: 'numeric',
+  month: 'short',
+  timeZone: 'UTC',
+  year: 'numeric',
+});
+
 export const formatIndexDate = (isoDate: string): string => {
-  return new Intl.DateTimeFormat('en-US', {
-    day: 'numeric',
-    month: 'short',
-    timeZone: 'UTC',
-  }).format(new Date(`${isoDate}T00:00:00.000Z`));
+  return indexDateFormatter.format(toUtcDate(isoDate));
 };
 
 export const formatPostDate = (isoDate: string): string => {
-  return new Intl.DateTimeFormat('en-US', {
-    day: 'numeric',
-    month: 'short',
-    timeZone: 'UTC',
-    year: 'numeric',
-  }).format(new Date(`${isoDate}T00:00:00.000Z`));
+  return postDateFormatter.format(toUtcDate(isoDate));
 };

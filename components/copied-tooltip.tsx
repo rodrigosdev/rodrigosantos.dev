@@ -1,8 +1,6 @@
 'use client';
 
-import type { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
-import { useEffect, useState } from 'react';
 
 import { color, spacing } from '~/app/global-tokens.stylex';
 
@@ -12,10 +10,6 @@ const reveal = stylex.keyframes({
     transform: 'translateY(0)',
   },
 });
-
-type CopiedTooltipProps = {
-  style?: StyleXStyles;
-};
 
 const IconClipboard = () => (
   <svg
@@ -35,45 +29,14 @@ const IconClipboard = () => (
   </svg>
 );
 
-const CopiedTooltip = ({ style }: CopiedTooltipProps) => (
-  <div {...stylex.props(styles.tooltipAnchor, style)}>
+const CopiedTooltip = () => (
+  <div {...stylex.props(styles.tooltipAnchor)}>
     <div aria-live="polite" {...stylex.props(styles.tooltip)}>
       <IconClipboard />
       <p>Copied to clipboard</p>
     </div>
   </div>
 );
-
-const useCopyFeedback = () => {
-  const [isCopied, setIsCopied] = useState(false);
-
-  useEffect(() => {
-    if (!isCopied) {
-      return undefined;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setIsCopied(false);
-    }, 1250);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [isCopied]);
-
-  const copy = (value: string) => {
-    void navigator.clipboard.writeText(value).then(
-      () => {
-        setIsCopied(true);
-      },
-      () => {
-        return undefined;
-      },
-    );
-  };
-
-  return { copy, isCopied };
-};
 
 const styles = stylex.create({
   tooltipAnchor: {
@@ -127,4 +90,4 @@ const styles = stylex.create({
   },
 });
 
-export { CopiedTooltip, IconClipboard, useCopyFeedback };
+export { CopiedTooltip, IconClipboard };

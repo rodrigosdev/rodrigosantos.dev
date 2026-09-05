@@ -1,14 +1,12 @@
 import * as stylex from '@stylexjs/stylex';
 import type { Metadata } from 'next';
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import remarkGfm from 'remark-gfm';
 
 import { color, spacing, text, tokens } from '~/app/global-tokens.stylex';
-import { SITE_NAME, SITE_URL } from '~/app/site';
+import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
 import { BlogFrame } from '~/components/blog/frame';
-import { mdxComponents } from '~/components/blog/mdx';
+import { PostBody } from '~/components/blog/post-body';
 import { formatPostDate, getLocalPosts, getPost } from '~/lib/blog';
 
 export const generateStaticParams = async () => {
@@ -41,7 +39,7 @@ export const generateMetadata = async (props: PageProps<'/blog/[slug]'>): Promis
   };
 };
 
-const BlogPost = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const BlogPost = async ({ params }: PageProps<'/blog/[slug]'>) => {
   const { slug } = await params;
   const post = await getPost(slug);
 
@@ -50,24 +48,20 @@ const BlogPost = async ({ params }: { params: Promise<{ slug: string }> }) => {
   }
 
   return (
-    <BlogFrame backHref="/blog" backLabel="Blog">
+    <>
       <article>
         <h1 {...stylex.props(styles.title)}>{post.title}</h1>
         <time dateTime={post.date} {...stylex.props(styles.date)}>
           {formatPostDate(post.date)}
         </time>
         <div {...stylex.props(styles.body)}>
-          <MDXRemote
-            components={mdxComponents}
-            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
-            source={post.body}
-          />
+          <PostBody source={post.body} />
         </div>
       </article>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
             headline: post.title,
@@ -75,24 +69,20 @@ const BlogPost = async ({ params }: { params: Promise<{ slug: string }> }) => {
             datePublished: post.date,
             author: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
             url: `${SITE_URL}/blog/${post.slug}`,
-          }).replaceAll('<', '\\u003c'),
+          }),
         }}
       />
-    </BlogFrame>
+    </>
   );
 };
 
-const BlogPostFallback = () => (
-  <BlogFrame backHref="/blog" backLabel="Blog">
-    <div {...stylex.props(styles.fallback)} />
-  </BlogFrame>
-);
-
 const BlogPostPage = (props: PageProps<'/blog/[slug]'>) => {
   return (
-    <Suspense fallback={<BlogPostFallback />}>
-      <BlogPost params={props.params} />
-    </Suspense>
+    <BlogFrame backHref="/blog" backLabel="Blog">
+      <Suspense fallback={<div {...stylex.props(styles.fallback)} />}>
+        <BlogPost {...props} />
+      </Suspense>
+    </BlogFrame>
   );
 };
 

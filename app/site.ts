@@ -34,6 +34,16 @@ export const jsonLd = {
   ],
 } as const;
 
-export function serializeJsonLd(): string {
-  return JSON.stringify(jsonLd).replaceAll('<', '\\u003c');
+type BlogPostingJsonLd = {
+  '@context': 'https://schema.org';
+  '@type': 'BlogPosting';
+  author: { '@type': 'Person'; name: string; url: string };
+  datePublished: string;
+  description: string;
+  headline: string;
+  url: string;
+};
+
+export function serializeJsonLd(value: typeof jsonLd | BlogPostingJsonLd): string {
+  return JSON.stringify(value).replaceAll('<', '\\u003c');
 }
