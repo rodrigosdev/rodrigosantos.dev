@@ -7,9 +7,8 @@ import { GeistSans } from 'geist/font/sans';
 import type { Metadata, Viewport } from 'next';
 
 import { color, tokens } from '~/app/global-tokens.stylex';
-import { serializeJsonLd, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '~/app/site';
+import { jsonLd, serializeJsonLd, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '~/app/site';
 import { Footer } from '~/components/footer';
-import { Header } from '~/components/header';
 
 import './app.css';
 
@@ -73,9 +72,8 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
       <body {...stylex.props(styles.body)}>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd() }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
-        <Header />
         {children}
         <Footer />
         <Analytics />

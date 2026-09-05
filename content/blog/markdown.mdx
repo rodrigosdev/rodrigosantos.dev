@@ -1,0 +1,226 @@
+---
+title: Markdown
+date: 2026-09-05
+description: How headings, lists, quotes, tables, and code look in a post.
+---
+
+This page is a dump of the bits I actually write. **Bold**, _italic_, ~~struck~~, and `inline code`. A [local link](/blog) and an [external one](https://shiki.matsu.io/).
+
+## Headings
+
+The title at the top is the only h1. Sections use h2.
+
+### Smaller heading
+
+h3 is for a named chunk inside a section. Language samples below use it.
+
+#### Even smaller
+
+h4 stays quiet. I will rarely need it.
+
+## Lists
+
+- Posts live in `content/blog`
+- Frontmatter needs `title`, `date`, and `description`
+- Nest when it helps
+  - Shiki colors the fence
+  - remark-gfm handles tables
+
+1. Write the MDX
+2. Open `/blog`
+3. Read it like a stranger
+
+- [x] Highlight TypeScript
+- [x] Highlight a few other languages
+- [ ] Stop adding languages I never paste
+
+## Quote
+
+> I keep posts short. A kitchen sink page like this is the exception.
+
+## Table
+
+| Fence  | Language   |
+| ------ | ---------- |
+| `ts`   | TypeScript |
+| `py`   | Python     |
+| `rs`   | Rust       |
+| `go`   | Go         |
+| `css`  | CSS        |
+| `json` | JSON       |
+| `sh`   | Shell      |
+| `diff` | Diff       |
+
+---
+
+## Code
+
+Fences go through Shiki with Vitesse Light and Vitesse Dark. The language tag on the fence picks the grammar.
+
+### TypeScript
+
+```ts
+type Result<T> = { ok: true; value: T } | { ok: false; error: string };
+
+const read = async (slug: string): Promise<Result<string>> => {
+  if (!/^[a-z0-9-]+$/.test(slug)) {
+    return { ok: false, error: 'bad slug' };
+  }
+
+  return { ok: true, value: slug };
+};
+```
+
+### JavaScript
+
+```js
+export const fenceLanguage = (className) => {
+  if (!className) {
+    return 'plaintext';
+  }
+
+  const marker = 'language-';
+  const index = className.indexOf(marker);
+  return index === -1 ? 'plaintext' : className.slice(index + marker.length);
+};
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class Post:
+    slug: str
+    title: str
+    date: str
+
+
+def newest(posts: list[Post]) -> Post:
+    return max(posts, key=lambda post: post.date)
+```
+
+### Rust
+
+```rust
+pub enum Result<T> {
+    Ok(T),
+    Err(String),
+}
+
+pub fn read(slug: &str) -> Result<String> {
+    if slug.is_empty() {
+        return Result::Err("bad slug".into());
+    }
+
+    Result::Ok(slug.to_string())
+}
+```
+
+### Go
+
+```go
+package blog
+
+type Post struct {
+    Slug  string
+    Title string
+    Date  string
+}
+
+func Newest(posts []Post) Post {
+    best := posts[0]
+    for _, post := range posts[1:] {
+        if post.Date > best.Date {
+            best = post
+        }
+    }
+    return best
+}
+```
+
+### CSS
+
+```css
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
+```
+
+### HTML
+
+```html
+<article>
+  <h1>Markdown</h1>
+  <time datetime="2026-09-05">Sep 5, 2026</time>
+  <pre><code class="language-ts">type Result = never;</code></pre>
+</article>
+```
+
+### JSON
+
+```json
+{
+  "title": "Markdown",
+  "date": "2026-09-05",
+  "tags": ["mdx", "shiki"]
+}
+```
+
+### YAML
+
+```yaml
+title: Markdown
+date: 2026-09-05
+description: How headings, lists, quotes, tables, and code look in a post.
+```
+
+### Shell
+
+```sh
+pnpm add shiki next-mdx-remote remark-gfm
+pnpm dev
+```
+
+### Diff
+
+```diff
+--- a/lib/highlight.ts
++++ b/lib/highlight.ts
+@@ -1,8 +1,9 @@
+-import { codeToHtml } from 'shiki';
++import { bundledLanguages, codeToHtml } from 'shiki';
+
+-const html = await codeToHtml(source, { lang, theme: 'vitesse-dark' });
++const html = await codeToHtml(source, {
++  lang,
++  themes: { light: 'vitesse-light', dark: 'vitesse-dark' },
++});
+```
+
+### SQL
+
+```sql
+select slug, title, date
+from posts
+where date >= '2026-01-01'
+order by date desc;
+```
+
+### GraphQL
+
+```graphql
+query Post($slug: ID!) {
+  post(slug: $slug) {
+    title
+    date
+    body
+  }
+}
+```
