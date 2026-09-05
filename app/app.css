@@ -15,11 +15,11 @@
 /* Dual themes: https://shiki.matsu.io/guide/dual-themes */
 .shiki {
   margin: 0;
-  padding: 10px 2.25rem 10px 10px;
+  padding: 0.75rem 2.25rem 0.75rem 0.75rem;
   overflow-x: auto;
   font-family: inherit;
   font-size: inherit;
-  line-height: 1.35;
+  line-height: 1.2;
 }
 
 .shiki code {
@@ -27,11 +27,6 @@
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-}
-
-.shiki .line {
-  display: block;
-  min-height: 1.35em;
 }
 
 @media (prefers-color-scheme: dark) {
