@@ -13,9 +13,10 @@ interface TextLinkProps {
   onClick?: () => void;
   style?: StyleXStyles;
   title: string;
+  type?: 'button';
 }
 
-const TextLink = ({ as = Link, external, href, onClick, style, title }: TextLinkProps) => {
+const TextLink = ({ as = Link, external, href, onClick, style, title, type }: TextLinkProps) => {
   return (
     <Slot
       as={external ? 'a' : as}
@@ -23,6 +24,7 @@ const TextLink = ({ as = Link, external, href, onClick, style, title }: TextLink
       onClick={onClick}
       rel={external ? 'noopener noreferrer' : undefined}
       target={external ? '_blank' : undefined}
+      type={type}
       {...stylex.props(styles.root, utils.focusText, style)}
     >
       {title}
@@ -32,9 +34,15 @@ const TextLink = ({ as = Link, external, href, onClick, style, title }: TextLink
 
 const styles = stylex.create({
   root: {
+    borderStyle: 'none',
+    borderWidth: 0,
     textDecoration: 'none',
+    appearance: 'none',
+    backgroundColor: 'transparent',
     color: 'inherit',
     cursor: 'pointer',
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
     textDecorationColor: {
       default: 'color-mix(in oklab, currentColor 30%, transparent)',
       ':hover': {

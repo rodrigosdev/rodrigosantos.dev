@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next';
 
 import { globalTokens as $ } from '~/app/global-tokens.stylex';
 import { serializeJsonLd, SITE_NAME, SITE_URL } from '~/app/site';
+import { Footer } from '~/components/footer';
 import { Header } from '~/components/header';
 
 import './app.css';
@@ -76,6 +77,7 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
         />
         <Header />
         {children}
+        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>
