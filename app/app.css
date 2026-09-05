@@ -11,3 +11,36 @@
  * It is automatically replaced with generated CSS during builds.
  */
 @stylex;
+
+/* Dual themes: https://shiki.matsu.io/guide/dual-themes */
+.shiki {
+  margin: 0;
+  padding: 10px 2.25rem 10px 10px;
+  overflow-x: auto;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.35;
+}
+
+.shiki code {
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.shiki .line {
+  display: block;
+  min-height: 1.35em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}

@@ -19,8 +19,11 @@
     "@vercel/speed-insights": "^2.0.0",
     "geist": "^1.7.2",
     "next": "16.3.2",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.4.3"
   },
   "devDependencies": {
     "@oxlint/plugins": "1.80.0",
