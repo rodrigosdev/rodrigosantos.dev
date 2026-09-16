@@ -1,13 +1,5 @@
 # Rodrigo Santos
 
-Personal site at [rodrigosantos.dev](https://rodrigosantos.dev). Research, experiments, and work.
-
-## About
-
-I'm an AI Engineer at [Snyk](https://snyk.io). Right now I'm spending my energy AI-ifying the platform. This repo is the source for that site.
-
-The homepage is short: **About**, **Latest**, and **Connect**. Color scheme follows the system — light and dark.
-
 ## Stack
 
 - [Next.js](https://nextjs.org) 16 and [React](https://react.dev) 19
@@ -37,10 +29,3 @@ This repo pins `pnpm@12.4.2` via `packageManager` in `package.json`.
 | `pnpm lint` | Lint with oxlint |
 | `pnpm format` | Format with oxfmt |
 | `pnpm typecheck` | Type-check with `tsc --noEmit` |
-
-## Layout
-
-- `app/` — App Router, metadata, sitemap, robots
-- `components/` — page sections and UI
-- `lib/` — Open Graph and icon helpers
-- `styles/` — shared StyleX utilities
