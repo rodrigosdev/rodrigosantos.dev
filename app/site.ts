@@ -1,6 +1,6 @@
 export const SITE_URL = 'https://rodrigosantos.dev';
 export const SITE_NAME = 'Rodrigo Santos';
-export const SITE_DESCRIPTION = 'Research, experiments, writing, and work by Rodrigo Santos.';
+export const SITE_DESCRIPTION = 'Research, experiments, and work by Rodrigo Santos.';
 export const SITE_EMAIL = 'hello@rodrigosantos.dev';
 export const SITE_GITHUB_URL = 'https://github.com/rodrigosdev';
 export const SITE_LINKEDIN_URL = 'https://www.linkedin.com/in/rrcssantos/';
@@ -34,16 +34,6 @@ export const jsonLd = {
   ],
 } as const;
 
-type BlogPostingJsonLd = {
-  '@context': 'https://schema.org';
-  '@type': 'BlogPosting';
-  author: { '@type': 'Person'; name: string; url: string };
-  datePublished: string;
-  description: string;
-  headline: string;
-  url: string;
-};
-
-export function serializeJsonLd(value: typeof jsonLd | BlogPostingJsonLd): string {
+export function serializeJsonLd(value: typeof jsonLd): string {
   return JSON.stringify(value).replaceAll('<', '\\u003c');
 }

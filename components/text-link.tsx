@@ -9,10 +9,9 @@ type TextLinkProps = {
   href: string;
   style?: StyleXStyles;
   title: string;
-  transitionTypes?: readonly string[];
 };
 
-const TextLink = ({ external, href, style, title, transitionTypes }: TextLinkProps) => {
+const TextLink = ({ external, href, style, title }: TextLinkProps) => {
   const linkProps = stylex.props(utils.link, utils.focusText, style);
 
   if (external) {
@@ -23,16 +22,8 @@ const TextLink = ({ external, href, style, title, transitionTypes }: TextLinkPro
     );
   }
 
-  if (transitionTypes === undefined) {
-    return (
-      <Link href={href} {...linkProps}>
-        {title}
-      </Link>
-    );
-  }
-
   return (
-    <Link href={href} transitionTypes={[...transitionTypes]} {...linkProps}>
+    <Link href={href} {...linkProps}>
       {title}
     </Link>
   );

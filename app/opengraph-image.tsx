@@ -8,7 +8,6 @@ export const size = ogSize;
 const OpenGraphImage = () => {
   return renderOgImage({
     description: null,
-    kicker: null,
     role: 'AI Engineer',
     title: SITE_NAME,
   });
