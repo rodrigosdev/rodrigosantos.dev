@@ -32,7 +32,6 @@ const styles = stylex.create({
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'center',
-    viewTransitionName: 'site-footer',
     paddingBottom: spacing.lg,
     paddingLeft: spacing.lg,
     paddingRight: spacing.lg,

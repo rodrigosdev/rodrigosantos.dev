@@ -1,8 +1,6 @@
 ## Routes:
 
 - [ ] `page.tsx` -> Home page
-- [ ] `blog.tsx` -> Blog page
-  - [ ] `blog/[slug].tsx` -> Blog page for a specific blog
 - [ ] `loading.tsx` -> Loading UI
 - [ ] `not-found.tsx` -> Not found UI
 - [ ] `error.tsx` -> Error UI
@@ -26,4 +24,4 @@ reference: https://nextjs.org/docs/app/api-reference/file-conventions/metadata/o
 
 ## Analytics:
 
-- [ ] maybe add [PostHog](https://posthog.com/). The end goal would be to have a queryable way to track metrics and events. This would be used to track views on the blog
+- [ ] maybe add [PostHog](https://posthog.com/). The end goal would be to have a queryable way to track metrics and events.

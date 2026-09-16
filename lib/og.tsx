@@ -23,12 +23,11 @@ const color = {
 
 type OgImageContent = {
   description: string | null;
-  kicker: string | null;
   role: string | null;
   title: string;
 };
 
-const OgCard = ({ description, kicker, role, title }: OgImageContent) => {
+const OgCard = ({ description, role, title }: OgImageContent) => {
   return (
     <div
       style={{
@@ -41,20 +40,6 @@ const OgCard = ({ description, kicker, role, title }: OgImageContent) => {
         width: '100%',
       }}
     >
-      {kicker === null ? null : (
-        <div
-          style={{
-            color: color.muted,
-            display: 'flex',
-            fontFamily: 'Geist Sans',
-            fontSize: 28,
-            fontWeight: 400,
-            marginBottom: 20,
-          }}
-        >
-          {kicker}
-        </div>
-      )}
       <div
         style={{
           display: 'flex',
