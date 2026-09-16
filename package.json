@@ -39,5 +39,5 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,mjs,cjs}": "pnpm lint"
   },
-  "packageManager": "pnpm@11.24.0"
+  "packageManager": "pnpm@12.4.2"
 }

@@ -13,7 +13,7 @@ The homepage is short: **About**, **Latest**, and **Connect**. Color scheme foll
 - [Next.js](https://nextjs.org) 16 and [React](https://react.dev) 19
 - [StyleX](https://stylexjs.com) for styles
 - [Geist](https://vercel.com/font) fonts
-- TypeScript, [pnpm](https://pnpm.io) 11, [oxlint](https://oxc.rs/docs/guide/usage/linter) / [oxfmt](https://oxc.rs/docs/guide/usage/formatter)
+- TypeScript, [pnpm](https://pnpm.io) 12, [oxlint](https://oxc.rs/docs/guide/usage/linter) / [oxfmt](https://oxc.rs/docs/guide/usage/formatter)
 - [Vercel Analytics](https://vercel.com/docs/analytics) and [Speed Insights](https://vercel.com/docs/speed-insights)
 
 ## Getting started
@@ -25,7 +25,7 @@ pnpm install
 pnpm dev
 ```
 
-This repo pins `pnpm@11.24.0` via `packageManager` in `package.json`.
+This repo pins `pnpm@12.4.2` via `packageManager` in `package.json`.
 
 ## Scripts
 
@@ -40,9 +40,7 @@ This repo pins `pnpm@11.24.0` via `packageManager` in `package.json`.
 
 ## Layout
 
-```
-app/            App Router: home, layout, sitemap, robots, Open Graph
-components/     Page sections and UI
-lib/            Open Graph and icon helpers
-styles/         Shared StyleX utilities
-```
+- `app/` — App Router, metadata, sitemap, robots
+- `components/` — page sections and UI
+- `lib/` — Open Graph and icon helpers
+- `styles/` — shared StyleX utilities
