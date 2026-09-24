@@ -11,7 +11,7 @@ const Header = () => {
         <Link href="/" {...stylex.props(utils.h2, utils.focusText)}>
           Rodrigo Santos
         </Link>
-        <p {...stylex.props(styles.subtitle)}>AI Engineer</p>
+        <p {...stylex.props(styles.subtitle)}>AI Engineer @ Snyk</p>
       </div>
     </header>
   );
