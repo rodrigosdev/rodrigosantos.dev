@@ -6,6 +6,19 @@
   }
 }
 
+/* Theme: follows the OS unless the toggle sets data-theme on <html>. */
+html {
+  color-scheme: light dark;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 /**
  * The @stylex directive is used by the @stylexjs/postcss-plugin.
  * It is automatically replaced with generated CSS during builds.

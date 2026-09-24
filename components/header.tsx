@@ -2,16 +2,18 @@ import * as stylex from '@stylexjs/stylex';
 import Link from 'next/link';
 
 import { color, spacing } from '~/app/global-tokens.stylex';
+import { ThemeToggle } from '~/components/theme-toggle';
 import { utils } from '~/styles/utils';
 
 const Header = () => {
   return (
     <header {...stylex.props(styles.header)}>
-      <div {...stylex.props(utils.inner)}>
+      <div {...stylex.props(utils.inner, styles.inner)}>
         <Link href="/" {...stylex.props(utils.h2, utils.focusText)}>
           Rodrigo Santos
         </Link>
         <p {...stylex.props(styles.subtitle)}>AI Engineer</p>
+        <ThemeToggle />
       </div>
     </header>
   );
@@ -27,6 +29,9 @@ const styles = stylex.create({
     paddingRight: spacing.lg,
     paddingTop: spacing.xxxl,
     width: '100%',
+  },
+  inner: {
+    position: 'relative',
   },
   subtitle: {
     color: color.textMuted,

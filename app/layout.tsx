@@ -9,6 +9,7 @@ import type { Metadata, Viewport } from 'next';
 import { color, tokens } from '~/app/global-tokens.stylex';
 import { jsonLd, serializeJsonLd, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '~/app/site';
 import { Footer } from '~/components/footer';
+import { THEME_SCRIPT } from '~/components/theme-toggle';
 
 import './app.css';
 
@@ -68,7 +69,11 @@ const RootLayout = ({ children }: LayoutProps<'/'>) => {
         ),
       )}
       lang="en"
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body {...stylex.props(styles.body)}>
         <script
           type="application/ld+json"
@@ -99,7 +104,6 @@ const styles = stylex.create({
     WebkitFontSmoothing: 'antialiased',
     backgroundColor: color.bg,
     color: color.text,
-    colorScheme: 'light dark',
     fontFamily: tokens.fontSans,
     transitionDuration: '150ms',
     transitionProperty:
