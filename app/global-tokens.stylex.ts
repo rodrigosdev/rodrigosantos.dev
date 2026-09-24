@@ -86,15 +86,14 @@ export const tokens = stylex.defineConsts({
   fontSans: 'var(--font-geist-sans), sans-serif',
 });
 
-const DARK = '@media (prefers-color-scheme: dark)';
-
+// Each color resolves via light-dark(), driven by `color-scheme` on <html> (see app/app.css).
 export const color = stylex.defineVars({
-  bg: { default: 'oklch(98.5% 0 0)', [DARK]: '#000' },
-  border: { default: 'oklch(92.2% 0 0)', [DARK]: 'oklch(26.9% 0 0)' },
-  fill: { default: 'oklch(92.2% 0 0)', [DARK]: 'oklch(26.9% 0 0)' },
-  ink: { default: 'oklch(14.5% 0 0)', [DARK]: '#fff' },
-  selection: { default: 'oklch(87% 0 0)', [DARK]: 'oklch(43.9% 0 0)' },
-  surface: { default: '#fff', [DARK]: 'oklch(20.5% 0 0)' },
-  text: { default: 'oklch(20.5% 0 0)', [DARK]: 'oklch(97% 0 0)' },
-  textMuted: { default: 'oklch(43.9% 0 0)', [DARK]: 'oklch(70.8% 0 0)' },
+  bg: 'light-dark(oklch(98.5% 0 0), #000)',
+  border: 'light-dark(oklch(92.2% 0 0), oklch(26.9% 0 0))',
+  fill: 'light-dark(oklch(92.2% 0 0), oklch(26.9% 0 0))',
+  ink: 'light-dark(oklch(14.5% 0 0), #fff)',
+  selection: 'light-dark(oklch(87% 0 0), oklch(43.9% 0 0))',
+  surface: 'light-dark(#fff, oklch(20.5% 0 0))',
+  text: 'light-dark(oklch(20.5% 0 0), oklch(97% 0 0))',
+  textMuted: 'light-dark(oklch(43.9% 0 0), oklch(70.8% 0 0))',
 });
